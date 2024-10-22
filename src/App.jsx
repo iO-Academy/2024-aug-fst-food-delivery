@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import RestaurantButton from "./Components/RestaurantButton/index.jsx";
 import HeroText from "./Components/HeroText/index.jsx";
+import { data } from "autoprefixer";
 
 function App() {
   const [restaurantNames, setRestaurantNames] = useState([]);
+  const [id, setId] = useState(2);
+
 
   useEffect(() => {
     fetch("https://food-delivery-api.dev.io-academy.uk/restaurants")
@@ -12,6 +15,16 @@ function App() {
         setRestaurantNames(data);
       });
   }, []);
+
+  useEffect(() => {
+    fetch(`https://food-delivery-api.dev.io-academy.uk/restaurants/${id}`)
+      .then((response) => response.json())
+      .then((data) => {});
+  }, []);
+
+  function getRestaurantId() {
+    restaurantId.map( (restaurantId) )
+  }
 
   return (
     <>
@@ -29,12 +42,14 @@ function App() {
         {restaurantNames.map((restaurantName) => {
           return (
             <RestaurantButton
+              handleClick={getRestaurantId}
               restaurantName={restaurantName.name}
               key={restaurantName.id}
             ></RestaurantButton>
           );
         })}
       </section>
+      <div></div>
       <footer className="p-4 border-t-2 mt-4 mx-4">
         <p>© Copyright iO Academy 2024</p>
       </footer>
