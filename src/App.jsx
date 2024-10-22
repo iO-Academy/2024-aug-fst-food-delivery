@@ -5,8 +5,8 @@ import { data } from "autoprefixer";
 
 function App() {
   const [restaurantNames, setRestaurantNames] = useState([]);
-  const [id, setId] = useState(2);
-
+  const [id, setId] = useState(1);
+  const [menuItems, setMenuItems] = useState("");
 
   useEffect(() => {
     fetch("https://food-delivery-api.dev.io-academy.uk/restaurants")
@@ -19,11 +19,14 @@ function App() {
   useEffect(() => {
     fetch(`https://food-delivery-api.dev.io-academy.uk/restaurants/${id}`)
       .then((response) => response.json())
-      .then((data) => {});
-  }, []);
+      .then((data) => {
+        setMenuItems(data);
+      });
+  }, [id]);
 
-  function getRestaurantId() {
-    restaurantId.map( (restaurantId) )
+  function getRestaurantId(e) {
+    setId(e.target.id);
+    console.log(menuItems);
   }
 
   return (
@@ -43,6 +46,7 @@ function App() {
           return (
             <RestaurantButton
               handleClick={getRestaurantId}
+              id={restaurantName.id}
               restaurantName={restaurantName.name}
               key={restaurantName.id}
             ></RestaurantButton>
