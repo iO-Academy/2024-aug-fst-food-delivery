@@ -2,31 +2,48 @@ import { useEffect, useState } from "react";
 import RestaurantButton from "./Components/RestaurantButton/index.jsx";
 import HeroText from "./Components/HeroText/index.jsx";
 import { data } from "autoprefixer";
+import { useDeferredValue } from "react";
 
 function App() {
   const [restaurantNames, setRestaurantNames] = useState([]);
-  const [id, setId] = useState(1);
-  const [menuItems, setMenuItems] = useState("");
+  const [id, setId] = useState(0);
 
-  useEffect(() => {
-    fetch("https://food-delivery-api.dev.io-academy.uk/restaurants")
-      .then((response) => response.json())
-      .then((data) => {
-        setRestaurantNames(data);
-      });
-  }, []);
+  function getRestaurantId() {
+    setId(id);
+  }
 
-  useEffect(() => {
-    fetch(`https://food-delivery-api.dev.io-academy.uk/restaurants/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setMenuItems(data);
-      });
-  }, [id]);
+  if (id == 0) {
+    useEffect(() => {
+      fetch("https://food-delivery-api.dev.io-academy.uk/restaurants")
+        .then((response) => response.json())
+        .then((data) => {
+          setRestaurantNames(data);
+        });
+    }, []);
+  } else {
+    useEffect(() => {
+      fetch(`https://food-delivery-api.dev.io-academy.uk/restaurants/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setMenuItems(data);
+        });
+    }, [id]);
+  }
 
-  function getRestaurantId(e) {
-    setId(e.target.id);
-    console.log(menuItems);
+  function renderMenu () {
+    if (id == 0) {
+      return (
+        restaurantNames.map ((restaurantName) => {
+
+          <RestaurantButton
+          handleClick={getRestaurantId}
+          id={restaurantName.id}
+          restaurantName={restaurantName.name}
+          key={restaurantName.id}
+          ></RestaurantButton>
+        })
+      )
+    }
   }
 
   return (
@@ -53,7 +70,7 @@ function App() {
           );
         })}
       </section>
-      <div></div>
+
       <footer className="p-4 border-t-2 mt-4 mx-4">
         <p>© Copyright iO Academy 2024</p>
       </footer>
