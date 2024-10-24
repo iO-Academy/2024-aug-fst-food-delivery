@@ -11,6 +11,12 @@ function App() {
   const [currentName, setCurrentName] = useState("");
 
   let xlMediaColumn;
+  let basketDisplay;
+
+  if (!currentId) {
+    basketDisplay = "hidden";
+  }
+
   if (currentId) {
     xlMediaColumn = "xl:grid-cols-6";
   }
@@ -87,7 +93,9 @@ function App() {
         >
           {renderContent()}
         </section>
-        <section className="fixed bottom-0 h-80 w-full bg-slate-200 p-4 border border-black xl:sticky xl:top-0 xl:w-1/4 xl:mt-4 xl:h-max ">
+        <section
+          className={`${basketDisplay} fixed bottom-0 h-80 w-full bg-slate-200 p-4 border border-black xl:sticky xl:top-0 xl:w-1/4 xl:mt-4 xl:h-max`}
+        >
           <img className="size-10 inline" src="public/basket-icon.svg"></img>
           <h3 className="inline text-blue-500 font-bold text-xl">Order</h3>
           <div className="mt-4 xl:h-96 h-4/6 overflow-y-scroll">
