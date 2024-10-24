@@ -8,6 +8,7 @@ function App() {
   const [currentId, setCurrentId] = useState(0);
   const [restaurants, setRestaurants] = useState([]);
   const [restaurantName, setRestaurantName] = useState("");
+  
 
   useEffect(() => {
     if (!currentId) {
@@ -43,7 +44,15 @@ function App() {
       });
     } else {
       return restaurantMenuItems?.map((foodItem, index) => {
-        return <MenuItem key={index} foodItem={foodItem} />;
+        
+        return (
+          
+          <MenuItem
+            key={index}
+            foodItem={foodItem}
+          
+          />
+        );
       });
     }
   }
