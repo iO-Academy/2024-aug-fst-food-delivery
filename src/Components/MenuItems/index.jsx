@@ -15,10 +15,7 @@ function MenuItems({ foodName, foodType, calories, price, side }) {
         {foodType && <ItemInfo itemName="foodType" itemValue={foodType} />}
         {side && <ItemInfo itemName="sideItem" itemValue={side} />}
       </div>
-      <div
-        id="priceInfo"
-        className="flex justify-between items-center my-4 xl:my-6"
-      >
+      <div id="priceInfo" className="flex justify-between items-center my-4 xl:my-6">
         <div className="font-bold ">£{price}</div>
         <div className="">
           <button className="bg-blue-500 text-white h-8 w-7 rounded">-</button>
