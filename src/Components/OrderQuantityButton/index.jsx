@@ -1,15 +1,6 @@
 import React, { useState } from "react";
 
-function OrderQuantityButton() {
-  let [count, setCount] = useState(0);
-
-  function handleIncrement() {
-    setCount(count + 1);
-  }
-
-  function handleDecrement() {
-    count > 0 && setCount(count - 1);
-  }
+function OrderQuantityButton( { count, handleIncrement, handleDecrement } ) {
 
   return (
     <div>

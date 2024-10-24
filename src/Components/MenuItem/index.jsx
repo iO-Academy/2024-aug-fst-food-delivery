@@ -1,7 +1,20 @@
+import React, { useState } from "react";
 import ItemInfo from "../ItemInfo";
 import OrderQuantityButton from "../OrderQuantityButton";
 
+
 function MenuItem({ foodItem }) {
+
+  const [count, setCount] = useState(0);
+
+  function handleIncrement(e) {
+    setCount(count + 1);
+  }
+
+  function handleDecrement(e) {
+    count > 0 && setCount(count - 1);
+  }
+
   return (
     <div
       id="border"
@@ -26,7 +39,7 @@ function MenuItem({ foodItem }) {
         className="flex justify-between items-center my-4 xl:my-6"
       >
         <div className="font-bold ">£{foodItem.price}</div>
-        <OrderQuantityButton />
+        <OrderQuantityButton count={count} handleIncrement={handleIncrement} handleDecrement={handleDecrement}/>
       </div>
     </div>
   );
