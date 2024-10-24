@@ -81,18 +81,35 @@ function App() {
         {renderReturnButton()}
       </header>
       {renderRestaurantName()}
-      <section
-        className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${xlMediaColumn} gap-8`}
-      >
-        {renderContent()}
-      </section>
-
-      <section className="border border-solid border-black">
-        <div className="border border-solid border-black p-4">
-          <img className="size-10 inline"  src="public/basket-icon.svg"></img><h3 className="inline text-blue-500 font-bold text-xl">Order</h3>
-          <OrderQuantityButton />
-        </div>
-      </section>
+      <div className="xl:flex">
+        <section
+          className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${xlMediaColumn} gap-8 border border-red-500`}
+        >
+          {renderContent()}
+        </section>
+        <section className="fixed bottom-0 h-80 w-full bg-slate-200 p-4 border border-black xl:sticky xl:top-0 xl:w-1/4 xl:mt-4 xl:h-max ">
+          <img className="size-10 inline" src="public/basket-icon.svg"></img>
+          <h3 className="inline text-blue-500 font-bold text-xl">Order</h3>
+          <div className="mt-4 xl:h-96 h-4/6 overflow-y-scroll">
+            <OrderQuantityButton />
+            <br />
+            <OrderQuantityButton />
+            <br />
+            <OrderQuantityButton />
+            <br />
+            <OrderQuantityButton />
+            <br />
+            <OrderQuantityButton />
+            <br />
+            <OrderQuantityButton />
+            <br />
+            <OrderQuantityButton />
+            <br />
+            <OrderQuantityButton />
+            <br />
+          </div>
+        </section>
+      </div>
       <footer className="p-4 border-t-2 mt-4 mx-4">
         <p>© Copyright iO Academy 2024</p>
       </footer>
