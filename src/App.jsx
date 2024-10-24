@@ -8,6 +8,7 @@ function App() {
   const [currentId, setCurrentId] = useState(0);
   const [restaurants, setRestaurants] = useState([]);
   const [restaurantName, setRestaurantName] = useState("");
+  const [basketItems, setBasketItems] = useState([]);
 
   useEffect(() => {
     if (!currentId) {
