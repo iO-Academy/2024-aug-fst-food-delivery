@@ -67,13 +67,16 @@ function App() {
         ) : null}
       </header>
       <Hero text={restaurantName} />
-      <section
-        className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${
-          currentId && "xl:grid-cols-6"
-        } gap-8`}
-      >
-        {renderContent()}
-      </section>
+      <div className="flex">
+        <section
+          className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${
+            currentId && "xl:grid-cols-6"
+          } gap-8`}
+        >
+          {renderContent()}
+        </section>
+        <div className="h-100 w-1/3 bg-slate-400">Hello</div>
+      </div>
       <footer className="p-4 border-t-2 mt-4 mx-4">
         <p>© Copyright iO Academy 2024</p>
       </footer>
