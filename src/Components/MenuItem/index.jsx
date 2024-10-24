@@ -4,7 +4,7 @@ function MenuItem({ foodItem }) {
   return (
     <div
       id="border"
-      className="border border-solid border-black w-full p-5 shadow-xl rounded"
+      className="border border-solid border-black w-full p-4 shadow-xl rounded"
     >
       <h3 id="itemName" className="font-bold text-md">
         {foodItem.foodName}

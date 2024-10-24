@@ -8,6 +8,13 @@ function App() {
   const [currentId, setCurrentId] = useState(0);
   const [restaurants, setRestaurants] = useState([]);
   const [restaurantName, setRestaurantName] = useState("");
+  let basketDisplay;
+
+
+
+  if (!currentId) {
+    basketDisplay = "hidden";
+  }
 
   useEffect(() => {
     if (!currentId) {
@@ -66,13 +73,23 @@ function App() {
         ) : null}
       </header>
       <Hero text={restaurantName} />
-      <section
-        className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${
-          currentId && "xl:grid-cols-6"
-        } gap-8`}
-      >
-        {renderContent()}
-      </section>
+      <div className="xl:flex">
+        <section
+          className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${currentId && "xl:grid-cols-6"
+            } gap-8`}
+        >
+          {renderContent()}
+        </section>
+        <section
+          className={`${basketDisplay} fixed bottom-0 h-80 w-full bg-slate-200 p-4 xl:sticky xl:top-0 xl:w-1/4 xl:mt-4 xl:h-max`}
+        >
+          <img className="size-10 inline" src="public/basket-icon.svg"></img>
+          <h3 className="inline text-blue-500 font-bold text-xl">Order</h3>
+          <div className="mt-4 xl:h-96 h-4/6 overflow-y-scroll">
+            <p>some stuff</p><button>a button</button>
+          </div>
+        </section>
+      </div>
       <footer className="p-4 border-t-2 mt-4 mx-4">
         <p>© Copyright iO Academy 2024</p>
       </footer>
