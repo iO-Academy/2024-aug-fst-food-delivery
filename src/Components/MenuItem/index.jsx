@@ -1,4 +1,5 @@
 import ItemInfo from "../ItemInfo";
+import OrderQuantityButton from "../OrderQuantityButton";
 
 function MenuItem({ foodItem }) {
   return (
@@ -25,11 +26,7 @@ function MenuItem({ foodItem }) {
         className="flex justify-between items-center my-4 xl:my-6"
       >
         <div className="font-bold ">£{foodItem.price}</div>
-        <div className="">
-          <button className="bg-blue-500 text-white h-8 w-7 rounded">-</button>
-          <span className="font-extrabold text-xs p-2">2</span>
-          <button className="bg-blue-500 text-white h-8 w-7 rounded">+</button>
-        </div>
+        <OrderQuantityButton />
       </div>
     </div>
   );
