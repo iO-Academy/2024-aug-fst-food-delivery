@@ -7,11 +7,11 @@ function MenuItem({ foodItem }) {
 
   const [count, setCount] = useState(0);
 
-  function handleIncrement(e) {
+  function handleIncrement() {
     setCount(count + 1);
   }
 
-  function handleDecrement(e) {
+  function handleDecrement() {
     count > 0 && setCount(count - 1);
   }
 
