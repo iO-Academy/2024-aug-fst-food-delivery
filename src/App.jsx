@@ -75,7 +75,7 @@ function App() {
       <Hero text={restaurantName} />
       <div className="xl:flex">
         <section
-          className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${currentId && "xl:grid-cols-6"
+          className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${currentId && "xl:grid-cols-5"
             } gap-8`}
         >
           {renderContent()}
