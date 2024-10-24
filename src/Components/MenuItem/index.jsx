@@ -2,17 +2,17 @@ import ItemInfo from "../ItemInfo";
 import OrderQuantityButton from "../OrderQuantityButton";
 import { useState } from "react";
 
-function MenuItem({ foodItem }) {
+function MenuItem({ foodItem, addToBasket, index }) {
   let [count, setCount] = useState(0);
 
   function handleIncrement() {
     setCount(count + 1);
+    addToBasket(index, count);
   }
 
   function handleDecrement() {
     count > 0 && setCount(count - 1);
   }
-
   return (
     <div
       id="border"
