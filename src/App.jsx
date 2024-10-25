@@ -83,10 +83,13 @@ function App() {
         </section>
         <div className="basket-container">
           <h2>Basket</h2>
+          {console.log(basket)}
+          
           {Object.keys(basket).length === 0 ? (
             <p>Your basket is empty.</p>
           ) : (
             Object.entries(basket).map(([restaurantId, foodItems]) => (
+              
               <div key={restaurantId} className="restaurant-section">
                 <h3>Restaurant ID: {restaurantId}</h3>
                 <ul>

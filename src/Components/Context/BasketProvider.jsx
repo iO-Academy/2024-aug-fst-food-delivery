@@ -19,6 +19,8 @@ const BasketContext = createContext();
 
 const BasketProvider = ({ children }) => {
     const [basket, setBasket] = useState({});
+    console.log(basket);
+    
 
     function addMenuItem(updatingRestaurantId, updatingMenuItemName) {
         setBasket((prevBasket) => {
