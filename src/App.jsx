@@ -57,6 +57,8 @@ function App() {
         (accumulator, current) => accumulator + (current.price * current.count), 0
       );
       setTotal(sum.toFixed(2))
+    } else {
+      setTotal(0)
     }
   },[basket])
 
@@ -91,10 +93,10 @@ function App() {
         <h1 className="font-bold">BASKET</h1>
         {
           basket.map((item) => {
-            return <p>{item.name} <span className="font-bold">quantity: {item.count}</span></p>
+            return <p key={item.name}>{item.name} <span className="font-bold">quantity: {item.count}</span></p>
           })
         }
-        {basketTotal ? <p>TOTAL: {basketTotal}</p> : ''}
+        {basketTotal ? <p className="font-bold">TOTAL: {basketTotal}</p> : ''}
         </div>
       </div>
       <footer className="p-4 border-t-2 mt-4 mx-4">
