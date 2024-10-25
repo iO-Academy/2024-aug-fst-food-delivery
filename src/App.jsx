@@ -82,7 +82,12 @@ function App() {
         >
           {renderContent()}
         </section>
-        <div className="h-100 w-1/3 bg-slate-400">Hello</div>
+        <div className="h-100 w-1/3 bg-slate-400">
+        {
+          basket.map((item) => {
+            return <p>{item.name} <span className="font-bold">quantity: {item.count}</span></p>
+          })
+        }</div>
       </div>
       <footer className="p-4 border-t-2 mt-4 mx-4">
         <p>© Copyright iO Academy 2024</p>
