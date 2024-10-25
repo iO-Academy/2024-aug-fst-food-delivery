@@ -1,9 +1,11 @@
 import ItemInfo from "../ItemInfo";
 import React, { useState } from "react";
+import { useBasket } from "../Context/BasketProvider";
 
 
 function MenuItem({ foodItem }) {
-  
+  const { basket } = useBasket();
+
 
   let [count, setCount] = useState(0);
 
@@ -14,9 +16,6 @@ function MenuItem({ foodItem }) {
   function handleDecrement() {
     count > 0 && setCount(count - 1);
   }
-
-  
- 
 
   return (
     <div

@@ -2,12 +2,23 @@ import { useEffect, useState } from "react";
 import RestaurantButton from "./Components/RestaurantButton/index.jsx";
 import Hero from "./Components/Hero/index.jsx";
 import MenuItem from "./Components/MenuItem/index.jsx";
+import { useBasket } from "./Components/Context/BasketProvider.jsx";
+
+  
+
+
 
 function App() {
   const [restaurantMenuItems, setRestaurantMenuItems] = useState([]);
   const [currentId, setCurrentId] = useState(0);
   const [restaurants, setRestaurants] = useState([]);
   const [restaurantName, setRestaurantName] = useState("");
+  const { basket } = useBasket();
+
+  console.log(basket);
+  
+  
+  
   
 
   useEffect(() => {
@@ -75,7 +86,7 @@ function App() {
           </button>
         ) : null}
       </header>
-      <Hero text={restaurantName} />
+      <Hero text={restaurantName}  />
       <div className="flex">
         <section
           className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${
@@ -83,6 +94,7 @@ function App() {
           } gap-8`}
         >
           {renderContent()}
+          
         </section>
         <div className="h-100 w-1/3 bg-slate-400">Hello</div>
       </div>
@@ -92,5 +104,9 @@ function App() {
     </>
   );
 }
+
+
+
+
 
 export default App;
