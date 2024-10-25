@@ -44,6 +44,11 @@ function App() {
       : setBasketItems([...newBasket, { index: index, count: clamped }]);
   }
 
+  function newFunc() {
+
+  
+  }
+
   function renderContent() {
     if (!currentId) {
       return restaurants.map((restaurant) => {
