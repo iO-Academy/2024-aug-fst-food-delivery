@@ -18,36 +18,28 @@ const BasketContext = createContext();
 // }
 
 const BasketProvider = ({ children }) => {
-    const [basket, setBasket] = useState('basket value');
-    
+    const [basket, setBasket] = useState({});
 
     function addMenuItem(updatingRestaurantId, updatingMenuItemName) {
-        // const newBasket = {
-        //     ...basket, // All the previous restaurant details
-        //     [restaurantId]: {
-        //         ...basket[restaurantId],
-        //         [menuItemName]: basket[restaurantId][menuItemName] + 1
-        //     }
-        // };
+        setBasket((prevBasket) => {
+            // Copy the previous state
+            const newBasket = { ...prevBasket };
+    
 
-        const newBasket = {};
-        for (const restaurantId in basket) {
-            newBasket[restaurantId] = basket[restaurantId];
-
-            if (restaurantId === updatingRestaurantId) {
-                const oldMenuItems = basket[restaurantId];
-                for (const menuItemName in oldMenuItems) {
-                    newBasket[restaurantId][menuItemName] = basket[restaurantId][menuItemName];
-
-                    if (menuItemName === updatingMenuItemName) {
-                        newBasket[restaurantId][menuItemName] =
-                            basket[restaurantId][menuItemName] + 1;
-                    }
-                }
+            if (!newBasket[updatingRestaurantId]) {
+                newBasket[updatingRestaurantId] = {};
             }
-        }
+    
 
-        setBasket(newBasket);
+            if (!newBasket[updatingRestaurantId][updatingMenuItemName]) {
+                newBasket[updatingRestaurantId][updatingMenuItemName] = 0;
+            }
+    
+
+            newBasket[updatingRestaurantId][updatingMenuItemName] += 1;
+    
+            return newBasket;
+        });
     }
 
     // function decreaseMenuItem(restaurantIndex, menuItemIndex) {

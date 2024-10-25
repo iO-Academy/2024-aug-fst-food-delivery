@@ -3,14 +3,15 @@ import React, { useState } from "react";
 import { useBasket } from "../Context/BasketProvider";
 
 
-function MenuItem({ foodItem }) {
-  const { basket } = useBasket();
-
-
-  let [count, setCount] = useState(0);
+function MenuItem({ foodItem, restaurantId }) {
+  const { basket, addMenuItem } = useBasket();
+  const [count, setCount] = useState(0);
 
   function handleIncrement() {
     setCount(count + 1);
+    console.log(restaurantId);
+    
+    addMenuItem(restaurantId, foodItem.foodName);
   }
 
   function handleDecrement() {

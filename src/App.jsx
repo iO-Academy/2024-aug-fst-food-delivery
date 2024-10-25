@@ -4,10 +4,6 @@ import Hero from "./Components/Hero/index.jsx";
 import MenuItem from "./Components/MenuItem/index.jsx";
 import { useBasket } from "./Components/Context/BasketProvider.jsx";
 
-  
-
-
-
 function App() {
   const [restaurantMenuItems, setRestaurantMenuItems] = useState([]);
   const [currentId, setCurrentId] = useState(0);
@@ -16,10 +12,6 @@ function App() {
   const { basket } = useBasket();
 
   console.log(basket);
-  
-  
-  
-  
 
   useEffect(() => {
     if (!currentId) {
@@ -55,14 +47,8 @@ function App() {
       });
     } else {
       return restaurantMenuItems?.map((foodItem, index) => {
-        
         return (
-          
-          <MenuItem
-            key={index}
-            foodItem={foodItem}
-          
-          />
+          <MenuItem key={index} foodItem={foodItem} restaurantId={currentId} />
         );
       });
     }
@@ -86,7 +72,7 @@ function App() {
           </button>
         ) : null}
       </header>
-      <Hero text={restaurantName}  />
+      <Hero text={restaurantName} />
       <div className="flex">
         <section
           className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${
@@ -94,9 +80,26 @@ function App() {
           } gap-8`}
         >
           {renderContent()}
-          
         </section>
-        <div className="h-100 w-1/3 bg-slate-400">Hello</div>
+        <div className="basket-container">
+          <h2>Basket</h2>
+          {Object.keys(basket).length === 0 ? (
+            <p>Your basket is empty.</p>
+          ) : (
+            Object.entries(basket).map(([restaurantId, foodItems]) => (
+              <div key={restaurantId} className="restaurant-section">
+                <h3>Restaurant ID: {restaurantId}</h3>
+                <ul>
+                  {Object.entries(foodItems).map(([foodItemName, quantity]) => (
+                    <li key={foodItemName}>
+                      {foodItemName}: {quantity}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          )}
+        </div>
       </div>
       <footer className="p-4 border-t-2 mt-4 mx-4">
         <p>© Copyright iO Academy 2024</p>
@@ -104,9 +107,5 @@ function App() {
     </>
   );
 }
-
-
-
-
 
 export default App;
