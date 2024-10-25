@@ -82,7 +82,7 @@ function App() {
         >
           {renderContent()}
         </section>
-        <div className="h-100 w-1/3 bg-slate-400">
+        <div className="flex flex-col p-4 gap-2 h-100 w-1/3 bg-slate-400">
         {
           basket.map((item) => {
             return <p>{item.name} <span className="font-bold">quantity: {item.count}</span></p>
