@@ -1,6 +1,19 @@
 import ItemInfo from "../ItemInfo";
+import OrderQuantityButton from "../OrderQuantityButton";
+import { useState } from "react";
 
-function MenuItem({ foodItem }) {
+function MenuItem({ foodItem, addToBasket, index, removeFromBasket }) {
+  let [count, setCount] = useState(0);
+
+  function handleIncrement() {
+    setCount(count + 1);
+    addToBasket(index, count);
+  }
+
+  function handleDecrement() {
+    count > 0 && setCount(count - 1);
+    removeFromBasket(index, count);
+  }
   return (
     <div
       id="border"
@@ -26,9 +39,11 @@ function MenuItem({ foodItem }) {
       >
         <div className="font-bold ">£{foodItem.price}</div>
         <div className="">
-          <button className="bg-blue-500 text-white h-8 w-7 rounded">-</button>
-          <span className="font-extrabold text-xs p-2">2</span>
-          <button className="bg-blue-500 text-white h-8 w-7 rounded">+</button>
+          <OrderQuantityButton
+            count={count}
+            handleIncrement={handleIncrement}
+            handleDecrement={handleDecrement}
+          />
         </div>
       </div>
     </div>

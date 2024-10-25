@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import RestaurantButton from "./Components/RestaurantButton/index.jsx";
 import Hero from "./Components/Hero/index.jsx";
 import MenuItem from "./Components/MenuItem/index.jsx";
+import OrderQuantityButton from "./Components/OrderQuantityButton/index.jsx";
 
 function App() {
   const [restaurantMenuItems, setRestaurantMenuItems] = useState([]);
   const [currentId, setCurrentId] = useState(0);
   const [restaurants, setRestaurants] = useState([]);
   const [restaurantName, setRestaurantName] = useState("");
+  const [basketItems, setBasketItems] = useState([]);
   let basketDisplay;
-
-
 
   if (!currentId) {
     basketDisplay = "hidden";
@@ -35,6 +35,20 @@ function App() {
     }
   }, [currentId]);
 
+  function addToBasket(index, count) {
+    let newBasket = basketItems.filter((obj) => obj.index !== index);
+    setBasketItems([...newBasket, { index: index, count: count + 1 }]);
+  }
+
+  function removeFromBasket(index, count) {
+    let newBasket = basketItems.filter((obj) => obj.index !== index);
+    let clamped = count <= 0 ? 0 : count - 1;
+
+    count <= 0
+      ? setBasketItems([...newBasket])
+      : setBasketItems([...newBasket, { index: index, count: clamped }]);
+  }
+
   function renderContent() {
     if (!currentId) {
       return restaurants.map((restaurant) => {
@@ -50,7 +64,15 @@ function App() {
       });
     } else {
       return restaurantMenuItems?.map((foodItem, index) => {
-        return <MenuItem key={index} foodItem={foodItem} />;
+        return (
+          <MenuItem
+            key={index}
+            foodItem={foodItem}
+            addToBasket={addToBasket}
+            removeFromBasket={removeFromBasket}
+            index={index}
+          />
+        );
       });
     }
   }
@@ -75,8 +97,9 @@ function App() {
       <Hero text={restaurantName} />
       <div className="xl:flex">
         <section
-          className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${currentId && "xl:grid-cols-5"
-            } gap-8`}
+          className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${
+            currentId && "xl:grid-cols-5"
+          } gap-8`}
         >
           {renderContent()}
         </section>
@@ -86,7 +109,15 @@ function App() {
           <img className="size-10 inline" src="public/basket-icon.svg"></img>
           <h3 className="inline text-blue-500 font-bold text-xl">Order</h3>
           <div className="mt-4 xl:h-96 h-4/6 overflow-y-scroll">
-            <p>some stuff</p><button>a button</button>
+            {basketItems.map((item) => {
+              return (
+                <div className="flex justify-between">
+                  <p>{item.index}</p>
+
+                  <OrderQuantityButton count={item.count} />
+                </div>
+              );
+            })}
           </div>
         </section>
       </div>
