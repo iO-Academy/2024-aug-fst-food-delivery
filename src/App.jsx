@@ -30,12 +30,18 @@ function App() {
     }
   }, [currentId]);
 
-  const hasValue = (obj, value) => Object.values(obj).includes(value);
-
   function addToBasket(index, count) {
-    setBasketItems([...basketItems, { index: index, count: count }]);
+    let newBasket = basketItems.filter((obj) => obj.index !== index);
+    setBasketItems([...newBasket, { index: index, count: count + 1 }]);
+  }
 
-    console.log(basketItems);
+  function removeFromBasket(index, count) {
+    let newBasket = basketItems.filter((obj) => obj.index !== index);
+    let clamped = count <= 0 ? 0 : count - 1;
+
+    count <= 0
+      ? setBasketItems([...newBasket])
+      : setBasketItems([...newBasket, { index: index, count: clamped }]);
   }
 
   function renderContent() {
@@ -58,6 +64,7 @@ function App() {
             key={index}
             foodItem={foodItem}
             addToBasket={addToBasket}
+            removeFromBasket={removeFromBasket}
             index={index}
           />
         );
@@ -83,25 +90,14 @@ function App() {
         ) : null}
       </header>
       <Hero text={restaurantName} />
-      <div className="flex">
-        <section
-          className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${
-            currentId && "xl:grid-cols-6"
-          } gap-8`}
-        >
-          {renderContent()}
-        </section>
-        <div className="h-100 bg-slate-500 w-1/3">
-          {basketItems.map((item, index) => {
-            return (
-              <div className="flex justify-between">
-                <p>{item.index}</p>
-                <OrderQuantityButton count={item.count} />
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <section
+        className={`mt-4 w-full px-4 grid items-start grid-cols-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${
+          currentId && "xl:grid-cols-6"
+        } gap-8`}
+      >
+        {renderContent()}
+      </section>
+
       <footer className="p-4 border-t-2 mt-4 mx-4">
         <p>© Copyright iO Academy 2024</p>
       </footer>
