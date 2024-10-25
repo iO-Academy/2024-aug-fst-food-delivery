@@ -49,10 +49,15 @@ function App() {
   }
 
   const [basket, setBasket] = useState([])
-
+  const [basketTotal, setTotal] = useState(0)
 
   useEffect(() => {
-    console.log(basket)
+    if(basket.length > 0) {
+      const sum = basket.reduce(
+        (accumulator, current) => accumulator + (current.price * current.count), 0
+      );
+      setTotal(sum.toFixed(2))
+    }
   },[basket])
 
   return (
@@ -88,7 +93,9 @@ function App() {
           basket.map((item) => {
             return <p>{item.name} <span className="font-bold">quantity: {item.count}</span></p>
           })
-        }</div>
+        }
+        {basketTotal ? <p>TOTAL: {basketTotal}</p> : ''}
+        </div>
       </div>
       <footer className="p-4 border-t-2 mt-4 mx-4">
         <p>© Copyright iO Academy 2024</p>

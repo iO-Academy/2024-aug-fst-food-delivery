@@ -14,7 +14,7 @@ function OrderQuantityButton( { basket, setBasket, foodItem } ) {
         setBasket([...found, updatedItem])
       } else {
         setItem(1)
-        setBasket([...basket, {name: foodItem.foodName, count: 1}])
+        setBasket([...basket, {name: foodItem.foodName, count: 1, price: foodItem.price}])
       }
     }
   }
