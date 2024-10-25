@@ -43,10 +43,17 @@ function App() {
       });
     } else {
       return restaurantMenuItems?.map((foodItem, index) => {
-        return <MenuItem key={index} foodItem={foodItem} />;
+        return <MenuItem basket={basket} setBasket={setBasket} key={index} foodItem={foodItem} />;
       });
     }
   }
+
+  const [basket, setBasket] = useState([])
+
+
+  useEffect(() => {
+    console.log(basket)
+  },[basket])
 
   return (
     <>
