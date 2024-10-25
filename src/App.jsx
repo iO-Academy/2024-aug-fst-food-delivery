@@ -38,13 +38,14 @@ function App() {
   function addToBasket(index, count) {
     let newBasket = basketItems.filter((obj) => obj.index !== index);
     setBasketItems([...newBasket, { index: index, count: count + 1 }]);
+    console.log(basketItems);
   }
 
   function removeFromBasket(index, count) {
     let newBasket = basketItems.filter((obj) => obj.index !== index);
     let clamped = count <= 0 ? 0 : count - 1;
 
-    count <= 0
+    count <= 1
       ? setBasketItems([...newBasket])
       : setBasketItems([...newBasket, { index: index, count: clamped }]);
   }
@@ -111,8 +112,10 @@ function App() {
           <div className="mt-4 xl:h-96 h-4/6 overflow-y-scroll">
             {basketItems.map((item) => {
               return (
-                <div className="flex justify-between">
-                  <p>{item.index}</p>
+                <div className="flex justify-between p-2 items-center">
+                  <p className="w-2/3">
+                    {restaurantMenuItems[item.index].foodName}
+                  </p>
 
                   <OrderQuantityButton count={item.count} />
                 </div>
